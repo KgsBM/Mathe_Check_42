@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gelingensnachweis Mathematik: Halbschriftliche & Schriftliche Division (KGS Bad Münder)</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Didaktisch lesbare Schulschriften -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800;900&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .heading-font {
+      font-family: 'Fredoka', cursive, sans-serif;
+    }
+    .mono-font {
+      font-family: 'Fira Code', monospace;
+    }
+    /* 36px Schulheft-Rechenkästchen */
+    .math-grid {
+      background-size: 36px 36px !important;
+      background-image: 
+        linear-gradient(to right, #94a3b8 1.5px, transparent 1.5px),
+        linear-gradient(to bottom, #94a3b8 1.5px, transparent 1.5px) !important;
+      background-color: #ffffff !important;
+      border: 2px solid #64748b !important;
+      background-position: top left;
+    }
+    /* Strikte Einzeiligkeit für alle Rechnungen */
+    .calc-row-single {
+      white-space: nowrap !important;
+      flex-wrap: nowrap !important;
+      display: inline-flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .input-cell {
+      width: 2.2rem;
+      height: 2.2rem;
+      text-align: center;
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 0.375rem;
+      outline: none;
+      transition: all 0.15s ease-in-out;
+    }
+    .input-cell:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+      background-color: #eff6ff;
+    }
+    .badge-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      padding: 0.2rem 0.65rem;
+      border-radius: 0.5rem;
+      border-width: 1.5px;
+    }
+
+    /* Subtilere Platzhalter-Transparenz auf dem Bildschirm */
+    input::placeholder, textarea::placeholder {
+      opacity: 0.55;
+      font-weight: 600;
+    }
+
+    /* DIN A4 Druckoptimierung (15 mm Standard-Rand) */
+    @page {
+      size: A4 portrait;
+      margin: 12mm 15mm 12mm 15mm;
+    }
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 10.5pt !important;
+        line-height: 1.3 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-card {
+        box-shadow: none !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        background: transparent !important;
+      }
+      .a4-page {
+        page-break-after: always;
+        break-after: page;
+        min-height: 268mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-sizing: border-box;
+      }
+      .a4-page:last-child {
+        page-break-after: avoid;
+        break-after: avoid;
+      }
+      .task-block {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+        border: 1.5px solid #cbd5e1 !important;
+        margin-bottom: 8px !important;
+        padding: 8px 12px !important;
+      }
+      .input-cell {
+        border-color: #64748b !important;
+      }
+
+      /* Eingabefelder im Druck klarweiß & Platzhalter unsichtbar */
+      input, textarea {
+        background-color: #ffffff !important;
+        background: #ffffff !important;
+        border: 1.5px solid #64748b !important;
+        color: #000000 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      input::placeholder, textarea::placeholder {
+        color: transparent !important;
+        opacity: 0 !important;
+        -webkit-text-fill-color: transparent !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen">
+
+  <!-- ============================================================== -->
+  <!-- KOPFLEISTE & STEUERUNG (wird beim Drucken verborgen)           -->
+  <!-- ============================================================== -->
+  <header class="no-print sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-indigo-200 shadow-sm py-2.5 px-4">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Logo & Titel -->
+      <div class="flex items-center gap-2.5">
+        <span class="text-3xl">➗</span>
+        <div>
+          <h1 class="font-bold text-slate-900 heading-font text-lg leading-tight flex items-center gap-2">
+            Gelingensnachweis: Division
+            <span class="text-xs bg-indigo-100 text-indigo-800 font-extrabold px-2 py-0.5 rounded-full border border-indigo-300">
+              KGS Bad Münder • Jg. 5
+            </span>
+            <span class="text-[10px] bg-amber-100 text-amber-900 font-black px-2 py-0.5 rounded-full border border-amber-300 flex items-center gap-1">
+              🤖 KI-generiert
+            </span>
+          </h1>
+          <p class="text-xs text-slate-500 font-semibold">
+            Halbschriftlich & Schriftlich • Erweiterter Standard & Expertenstandard • Zeit: <strong>30 Minuten</strong>
+          </p>
+        </div>
+      </div>
+
+      <!-- 30-Minuten-Prüfungstimer -->
+      <div class="flex items-center bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-300 gap-3">
+        <div class="text-right">
+          <div class="text-[10px] font-bold uppercase text-slate-500 tracking-wider">Verbleibende Zeit</div>
+          <div id="timer-display" class="text-xl font-black mono-font text-indigo-700 tracking-wider">30:00</div>
+        </div>
+        <div class="flex items-center gap-1">
+          <button id="timer-toggle-btn" onclick="toggleTimer()" title="Timer starten / anhalten" class="p-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-sm transition">
+            <svg id="timer-play-icon" class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4.5 3.5v13l11-6.5-11-6.5z"/></svg>
+            <svg id="timer-pause-icon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 4h3v12H5V4zm7 0h3v12h-3V4z"/></svg>
+          </button>
+          <button onclick="resetTimer()" title="Timer zurücksetzen" class="p-1.5 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-lg transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Aktions-Buttons -->
+      <div class="flex items-center flex-wrap gap-2 text-xs font-bold">
+        <button onclick="regenerateTasks()" class="flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-white px-3 py-2 rounded-xl shadow-sm transition">
+          <span>🎲</span> Neue Aufgaben würfeln
+        </button>
+
+        <button onclick="toggleSolutions()" id="btn-toggle-solutions" class="flex items-center gap-1.5 bg-sky-600 hover:bg-sky-700 text-white px-3 py-2 rounded-xl shadow-sm transition">
+          <span>👁️</span> Musterlösung einblenden
+        </button>
+
+        <button onclick="evaluateTest()" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3.5 py-2 rounded-xl shadow-sm transition">
+          <span>✅</span> Jetzt auswerten
+        </button>
+
+        <button onclick="window.print()" class="flex items-center gap-1.5 bg-slate-800 hover:bg-slate-900 text-white px-3 py-2 rounded-xl shadow transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+          Drucken (A4)
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Benutzerfreundliche Modal-Meldung -->
+  <div id="custom-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs hidden p-4">
+    <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl border-2 border-indigo-200 transform transition-all text-center">
+      <div id="modal-icon" class="text-4xl mb-2">🎉</div>
+      <h3 id="modal-title" class="text-xl font-black text-slate-900 heading-font mb-2">Gelingensnachweis beendet!</h3>
+      <p id="modal-body" class="text-sm text-slate-600 leading-relaxed mb-5">Hier steht das Ergebnis.</p>
+      <button onclick="closeModal()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2.5 px-4 rounded-xl shadow transition">
+        Verstanden & Weiter
+      </button>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto p-3 md:p-6">
+    <div class="print-card bg-white rounded-3xl p-6 md:p-10 shadow-lg border-2 border-indigo-200">
+
+      <!-- ============================================================== -->
+      <!-- SEITE 1: ERWEITERTER STANDARD (KIRSCHE 🍒)                      -->
+      <!-- ============================================================== -->
+      <div class="a4-page">
+        <div>
+          
+          <!-- Offizieller Kopf KGS Bad Münder -->
+          <div class="border-b-2 border-indigo-300 pb-3 mb-3">
+            <div class="flex justify-between items-start">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="inline-flex items-center gap-1.5 bg-indigo-100 text-indigo-900 text-xs font-black px-3 py-0.5 rounded-full uppercase tracking-wider border border-indigo-300">
+                    KGS Bad Münder • Fachbereich Mathematik • Jahrgang 5
+                  </span>
+                  <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 text-[10px] font-black px-2 py-0.5 rounded-full border border-amber-300">
+                    🤖 KI-generiertes Unterrichtsmaterial
+                  </span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 heading-font mt-1.5 tracking-tight">
+                  🎯 Gelingensnachweis: Halbschriftlich & Schriftlich Dividieren
+                </h2>
+                <p class="text-slate-600 text-xs font-semibold mt-0.5">
+                  Basis: Dreifach Mathe 5 (Cornelsen) & KC IGS Niedersachsen • Bearbeitungszeit: <strong>30 Minuten</strong>
+                </p>
+              </div>
+
+              <!-- Maskottchen -->
+              <div class="bg-indigo-50 px-3.5 py-1.5 rounded-2xl flex items-center gap-2 border-2 border-indigo-300 shadow-sm text-center">
+                <span class="text-2xl">🦉</span>
+                <span class="text-[11px] font-black text-indigo-950 leading-tight">
+                  Eule Ella:<br><span class="text-[9px] font-bold text-indigo-700">Teile schlau & gerecht!</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Schülerdaten-Eingabe -->
+            <div class="grid grid-cols-3 gap-3 mt-3 bg-indigo-50/70 p-2.5 rounded-xl border-2 border-indigo-200 text-xs font-bold text-slate-700">
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Name:</label>
+                <input type="text" id="student-name" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-indigo-500 outline-none">
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Klasse:</label>
+                <div class="flex items-center gap-1">
+                  <span class="text-sm font-bold">5</span>
+                  <input type="text" id="student-class" class="w-16 bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-indigo-500 outline-none">
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] uppercase text-slate-500 font-extrabold">Datum:</label>
+                <input type="text" id="test-date" class="w-full bg-white border border-slate-300 rounded-lg px-2 py-1 text-slate-800 font-bold focus:border-indigo-500 outline-none">
+              </div>
+            </div>
+
+            <!-- Didaktische Niveaustufen-Leiste (Strikt nach Vorgabe, Fallback entfernt, %20 eingefügt) -->
+            <div class="grid grid-cols-2 gap-3 mt-2.5 text-xs font-bold text-center">
+              <div class="bg-rose-50 text-rose-950 p-2 rounded-xl border-2 border-rose-400 flex items-center justify-center gap-2 shadow-xs ring-2 ring-rose-200">
+                <span class="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border-2 border-rose-400 shadow-xs">
+                  <img src="3%20Kirsche.png" alt="Kirsche" class="w-7 h-7 shrink-0 object-contain drop-shadow-xs">
+                  <span class="text-rose-700 font-black text-xs uppercase tracking-wide">Erweiterter Standard</span>
+                </span>
+                <span class="text-amber-500 font-black">⭐⭐⭐</span>
+                <span>(18 P.)</span>
+              </div>
+              <div class="bg-purple-50 text-purple-950 p-2 rounded-xl border-2 border-purple-400 flex items-center justify-center gap-2 shadow-xs ring-2 ring-purple-200">
+                <span class="inline-flex items-center gap-1.5 bg-white px-2 py-1 rounded-lg border-2 border-purple-400 shadow-xs">
+                  <img src="4%20Brombeere.png" alt="Brombeere" class="w-7 h-7 shrink-0 object-contain drop-shadow-xs">
+                  <span class="text-purple-800 font-black text-xs uppercase tracking-wide">Experten-<br>standard</span>
+                </span>
+                <span class="text-amber-500 font-black">⭐⭐⭐⭐</span>
+                <span>(12 P.)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================== -->
+          <!-- TEIL 1: ERWEITERTER STANDARD (KIRSCHE 🍒)                       -->
+          <!-- ============================================================== -->
+          <section class="mb-4">
+            <div class="flex items-center gap-2.5 mb-2 bg-rose-50 border-l-4 border-rose-500 p-2 rounded-r-xl border border-rose-200">
+              <span class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-lg border border-rose-300 shadow-xs">
+                <img src="3%20Kirsche.png" alt="Kirsche" class="w-6 h-6 shrink-0 object-contain">
+                <span class="text-xs font-black text-rose-700">Erweiterter Standard</span>
+              </span>
+              <span class="text-sm font-bold text-amber-500">⭐⭐⭐</span>
+              <h3 class="font-extrabold text-rose-950 text-sm md:text-base heading-font">
+                Teil 1: Halbschriftlich & Schriftlich dividieren
+              </h3>
+              <span class="ml-auto text-xs bg-rose-100 text-rose-900 font-black px-2 py-0.5 rounded-full border border-rose-300">18 Punkte</span>
+            </div>
+
+            <!-- Aufgabe 1: Halbschriftliche Division -->
+            <div class="task-block mb-3.5 p-3.5 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-rose-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">1</span>
+                  Halbschriftliche Division: Die schlaue Zerlegung
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 6 P.</span>
+              </div>
+              <p class="text-xs md:text-sm text-slate-700 mb-2">
+                Zerlege den Dividenden schlau in bequeme Vielfache des Teilers (z. B. Hunderter- und Zehnerzahl), rechne die Teilaufgaben aus und addiere die Einzelergebnisse:
+              </p>
+
+              <!-- Aufgabenkasten mit flexiblen Daten -->
+              <div class="bg-sky-50/70 p-3 rounded-xl border border-sky-200">
+                <div class="flex items-center justify-between flex-wrap gap-2 mb-2 font-bold text-sm">
+                  <div>
+                    Rechne halbschriftlich: 
+                    <span id="t1-equation" class="badge-chip bg-white border-sky-400 text-sky-900 text-base mono-font ml-1">756 : 6 = ?</span>
+                  </div>
+                  <span class="text-xs text-sky-800 font-semibold bg-sky-200/60 px-2 py-0.5 rounded-md">Dreifach Mathe: Schritt-für-Schritt-Methode</span>
+                </div>
+
+                <!-- Zerlegungszeilen zum Eintragen -->
+                <div class="space-y-1.5 text-xs md:text-sm mono-font">
+                  <!-- Zeile 1: Größter Hunderter -->
+                  <div class="calc-row-single gap-1.5 bg-white p-1.5 rounded-lg border border-slate-200 w-full overflow-x-auto">
+                    <span class="w-6 text-slate-400 font-bold shrink-0">1.</span>
+                    <input type="number" id="t1-p1" class="w-16 text-center border-b-2 border-slate-400 font-bold text-slate-900 outline-none shrink-0">
+                    <span class="shrink-0">:</span>
+                    <span id="t1-div1" class="font-bold text-sky-900 shrink-0">6</span>
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t1-q1" class="w-16 text-center border-b-2 border-slate-400 font-bold text-indigo-700 outline-none shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 ml-2 shrink-0" id="sol-t1-row1"></span>
+                  </div>
+
+                  <!-- Zeile 2: Zehnerbetrag -->
+                  <div class="calc-row-single gap-1.5 bg-white p-1.5 rounded-lg border border-slate-200 w-full overflow-x-auto">
+                    <span class="w-6 text-slate-400 font-bold shrink-0">2.</span>
+                    <input type="number" id="t1-p2" class="w-16 text-center border-b-2 border-slate-400 font-bold text-slate-900 outline-none shrink-0">
+                    <span class="shrink-0">:</span>
+                    <span id="t1-div2" class="font-bold text-sky-900 shrink-0">6</span>
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t1-q2" class="w-16 text-center border-b-2 border-slate-400 font-bold text-indigo-700 outline-none shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 ml-2 shrink-0" id="sol-t1-row2"></span>
+                  </div>
+
+                  <!-- Zeile 3: Restlicher Einerbetrag -->
+                  <div class="calc-row-single gap-1.5 bg-white p-1.5 rounded-lg border border-slate-200 w-full overflow-x-auto">
+                    <span class="w-6 text-slate-400 font-bold shrink-0">3.</span>
+                    <input type="number" id="t1-p3" class="w-16 text-center border-b-2 border-slate-400 font-bold text-slate-900 outline-none shrink-0">
+                    <span class="shrink-0">:</span>
+                    <span id="t1-div3" class="font-bold text-sky-900 shrink-0">6</span>
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t1-q3" class="w-16 text-center border-b-2 border-slate-400 font-bold text-indigo-700 outline-none shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 ml-2 shrink-0" id="sol-t1-row3"></span>
+                  </div>
+
+                  <!-- Gesamtergebnis -->
+                  <div class="pt-2 mt-2 border-t border-sky-200 flex items-center justify-between flex-nowrap whitespace-nowrap gap-2 overflow-x-auto">
+                    <div class="calc-row-single gap-2">
+                      <span class="font-bold text-slate-800 shrink-0">Gesamtrechnung:</span>
+                      <span id="t1-full-eq" class="font-black text-indigo-900 mono-font text-sm shrink-0">756 : 6 = </span>
+                      <input type="number" id="t1-ans" class="w-24 text-center border-2 border-sky-500 rounded-lg py-0.5 font-black text-indigo-900 text-sm outline-none bg-white shrink-0">
+                    </div>
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 shrink-0" id="sol-t1-res"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 2: Schriftliche Division mit zwei Teilaufgaben (2a & 2b) -->
+            <div class="task-block mb-3 p-3.5 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-rose-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">2</span>
+                  Schriftliche Division mit Überschlag (Zwei Aufgaben)
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 6 P.</span>
+              </div>
+
+              <!-- Didaktische Tipp-Box außerhalb des Rechenfensters -->
+              <div class="bg-amber-50 border-2 border-amber-300 rounded-xl p-2.5 mb-2.5 flex items-center gap-2.5 text-xs text-amber-950 font-bold">
+                <span class="text-xl shrink-0">💡</span>
+                <div class="leading-snug">
+                  <span class="text-amber-900 font-extrabold uppercase text-[11px] block">Tipp-Box: Der 4-Schritte-Kreislauf</span>
+                  <span>1. <strong>Dividieren</strong> (Wie oft passt der Teiler?) ➔ 2. <strong>Multiplizieren</strong> (Malrechnen) ➔ 3. <strong>Subtrahieren</strong> (Rest bestimmen) ➔ 4. <strong>Herabholen</strong> (Nächste Ziffer).</span>
+                </div>
+              </div>
+
+              <p class="text-xs md:text-sm text-slate-700 mb-2">
+                Führe jeweils zuerst einen <strong>Überschlag (Ü)</strong> durch und rechne anschließend den <strong>schriftlichen Rechenweg</strong> stellenweise im Kästchenraster aus:
+              </p>
+
+              <!-- TEILAUFGABE 2a -->
+              <div class="mb-3 p-2.5 rounded-xl border border-sky-200 bg-sky-50/40">
+                <div class="flex justify-between items-center mb-1.5">
+                  <span class="font-extrabold text-sky-900 text-xs uppercase tracking-wide">Aufgabe 2a:</span>
+                  <span id="t2a-task-display" class="mono-font text-sm text-indigo-900 badge-chip bg-white border-indigo-400 font-bold">3 744 : 4 = ?</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 text-xs">
+                  <div class="bg-white p-2 rounded-lg border border-slate-300 calc-row-single gap-1.5 font-mono overflow-x-auto">
+                    <span class="font-black text-slate-800 not-italic font-sans shrink-0">Überschlag (Ü):</span>
+                    <span id="t2a-ue-div" class="font-bold text-slate-900 shrink-0">?</span>
+                    <span class="shrink-0">≈</span>
+                    <input type="text" id="t2a-ue-input" class="w-full bg-slate-50 border border-slate-400 rounded px-1.5 py-0.5 text-xs font-bold text-slate-900 shrink-0">
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-300 calc-row-single gap-2 overflow-x-auto">
+                    <span class="font-black text-slate-800 font-sans shrink-0">Endergebnis:</span>
+                    <input type="number" id="t2a-result-input" class="w-28 text-center border-2 border-indigo-500 rounded-lg py-0.5 font-black text-indigo-900 text-sm outline-none bg-white shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-700 shrink-0" id="sol-t2a-res"></span>
+                  </div>
+                </div>
+                <span class="solution-hint hidden text-[11px] font-bold text-emerald-700 block mb-1" id="sol-t2a-ue"></span>
+
+                <!-- Vergrößertes 36px Rechenkästchen 2a (Dynamische Höhe) -->
+                <div class="math-grid w-full rounded-xl overflow-hidden font-mono text-base font-bold" style="line-height: 36px;">
+                  <div id="t2a-grid-default" class="w-full flex flex-col text-indigo-900"></div>
+                  <div id="t2a-grid-solution" class="w-full flex-col hidden text-emerald-700"></div>
+                </div>
+              </div>
+
+              <!-- TEILAUFGABE 2b -->
+              <div class="p-2.5 rounded-xl border border-sky-200 bg-sky-50/40">
+                <div class="flex justify-between items-center mb-1.5">
+                  <span class="font-extrabold text-sky-900 text-xs uppercase tracking-wide">Aufgabe 2b:</span>
+                  <span id="t2b-task-display" class="mono-font text-sm text-indigo-900 badge-chip bg-white border-indigo-400 font-bold">2 935 : 5 = ?</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-2 text-xs">
+                  <div class="bg-white p-2 rounded-lg border border-slate-300 calc-row-single gap-1.5 font-mono overflow-x-auto">
+                    <span class="font-black text-slate-800 not-italic font-sans shrink-0">Überschlag (Ü):</span>
+                    <span id="t2b-ue-div" class="font-bold text-slate-900 shrink-0">?</span>
+                    <span class="shrink-0">≈</span>
+                    <input type="text" id="t2b-ue-input" class="w-full bg-slate-50 border border-slate-400 rounded px-1.5 py-0.5 text-xs font-bold text-slate-900 shrink-0">
+                  </div>
+                  <div class="bg-white p-2 rounded-lg border border-slate-300 calc-row-single gap-2 overflow-x-auto">
+                    <span class="font-black text-slate-800 font-sans shrink-0">Endergebnis:</span>
+                    <input type="number" id="t2b-result-input" class="w-28 text-center border-2 border-indigo-500 rounded-lg py-0.5 font-black text-indigo-900 text-sm outline-none bg-white shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-700 shrink-0" id="sol-t2b-res"></span>
+                  </div>
+                </div>
+                <span class="solution-hint hidden text-[11px] font-bold text-emerald-700 block mb-1" id="sol-t2b-ue"></span>
+
+                <!-- Vergrößertes 36px Rechenkästchen 2b (Dynamische Höhe) -->
+                <div class="math-grid w-full rounded-xl overflow-hidden font-mono text-base font-bold" style="line-height: 36px;">
+                  <div id="t2b-grid-default" class="w-full flex flex-col text-indigo-900"></div>
+                  <div id="t2b-grid-solution" class="w-full flex-col hidden text-emerald-700"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 3: Division mit Rest & Probe (Einzeilig) -->
+            <div class="task-block p-3.5 rounded-2xl bg-white border-2 border-slate-200 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-rose-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">3</span>
+                  Division mit Rest & Probe durch Multiplikation
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 6 P.</span>
+              </div>
+
+              <p class="text-xs md:text-sm text-slate-700 mb-2">
+                Berechne das Ergebnis mit <strong>Rest (R)</strong> und führe die Probe durch (Quotient · Divisor + Rest):
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm">
+                <!-- Divisionsrechnung mit Rest (Einzeilig ohne Umbruch) -->
+                <div class="bg-amber-50/70 p-3 rounded-xl border border-amber-200">
+                  <span class="font-bold text-amber-950 block mb-1">Rechnung:</span>
+                  <div class="calc-row-single gap-1.5 mono-font text-sm overflow-x-auto w-full">
+                    <span id="t3-equation-text" class="font-black text-slate-900 shrink-0">435 : 7 =</span>
+                    <input type="number" id="t3-quot-input" class="w-20 text-center border-b-2 border-amber-600 font-bold bg-white px-1 py-0.5 outline-none shrink-0">
+                    <span class="font-bold text-amber-800 shrink-0">R</span>
+                    <input type="number" id="t3-rem-input" class="w-14 text-center border-b-2 border-amber-600 font-bold bg-white px-1 py-0.5 outline-none shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-xs font-bold text-emerald-600 block mt-1.5" id="sol-t3-div"></span>
+                </div>
+
+                <!-- Probe-Rechnung (Einzeilig ohne Umbruch) -->
+                <div class="bg-emerald-50/70 p-3 rounded-xl border border-emerald-200">
+                  <span class="font-bold text-emerald-950 block mb-1">Probe durch Multiplikation:</span>
+                  <div class="calc-row-single gap-1 mono-font text-xs overflow-x-auto w-full">
+                    <span class="shrink-0">(</span>
+                    <input type="number" id="t3-probe-q" class="w-14 text-center border-b-2 border-emerald-600 font-bold bg-white px-1 py-0.5 shrink-0">
+                    <span class="shrink-0">·</span>
+                    <span id="t3-probe-divisor" class="font-bold text-slate-900 shrink-0">7</span>
+                    <span class="shrink-0">)</span>
+                    <span class="shrink-0">+</span>
+                    <input type="number" id="t3-probe-r" class="w-12 text-center border-b-2 border-emerald-600 font-bold bg-white px-1 py-0.5 shrink-0">
+                    <span class="shrink-0">=</span>
+                    <input type="number" id="t3-probe-total" class="w-16 text-center border-2 border-emerald-600 rounded font-black text-emerald-900 bg-white px-1 py-0.5 shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-xs font-bold text-emerald-600 block mt-1.5" id="sol-t3-probe"></span>
+                </div>
+              </div>
+            </div>
+
+          </section>
+        </div>
+
+        <!-- Fußzeile Seite 1 mit KI-Kennzeichnung -->
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-xs text-slate-400 font-bold">
+          <span>KGS Bad Münder • Mathematik 5 • <strong class="text-slate-500">🤖 KI-generiertes Unterrichtsmaterial</strong></span>
+          <span class="bg-slate-100 px-2 py-0.5 rounded-md text-slate-600">Seite 1 von 2 • Weiter mit Expertenstandard ➔</span>
+        </div>
+      </div>
+
+
+      <!-- ============================================================== -->
+      <!-- SEITE 2: EXPERTENSTANDARD (BROMBEERE 🫐)                        -->
+      <!-- ============================================================== -->
+      <div class="a4-page mt-6">
+        <div>
+          <!-- Kopfzeile Seite 2 mit KI-Kennzeichnung -->
+          <div class="flex justify-between items-center border-b-2 border-purple-300 pb-1.5 mb-3">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-black text-purple-950 heading-font">Gelingensnachweis Mathematik 5 • KGS Bad Münder</span>
+              <span class="text-[10px] bg-amber-100 text-amber-900 font-black px-1.5 py-0.5 rounded border border-amber-300">🤖 KI-generiert</span>
+            </div>
+            <span class="text-xs text-slate-700 font-bold">Schüler/in: <span class="header-name-mirror">______________________</span></span>
+          </div>
+
+          <!-- ==================== TEIL 2: EXPERTENSTANDARD ==================== -->
+          <section class="mb-3">
+            <div class="flex items-center gap-2.5 mb-2 bg-purple-50 border-l-4 border-purple-600 p-2 rounded-r-xl border border-purple-200">
+              <span class="inline-flex items-center gap-1.5 bg-white px-2 py-0.5 rounded-lg border border-purple-300 shadow-xs">
+                <img src="4%20Brombeere.png" alt="Brombeere" class="w-6 h-6 shrink-0 object-contain">
+                <span class="text-xs font-black text-purple-900">Expertenstandard</span>
+              </span>
+              <span class="text-sm font-bold text-amber-500">⭐⭐⭐⭐</span>
+              <h3 class="font-extrabold text-purple-950 text-sm md:text-base heading-font">
+                Teil 2: Vertiefen, Modellieren & Fehler analysieren
+              </h3>
+              <span class="ml-auto text-xs bg-purple-200 text-purple-900 font-black px-2 py-0.5 rounded-full border border-purple-300">12 Punkte</span>
+            </div>
+
+            <!-- Aufgabe 4: Schriftliche Division mit zweistelligem Teiler -->
+            <div class="task-block mb-3 p-3.5 rounded-2xl bg-white border-2 border-purple-300 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-purple-700 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">4</span>
+                  Schriftliche Division mit zweistelligem Teiler
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 4 P.</span>
+              </div>
+              <p class="text-xs md:text-sm text-slate-700 mb-2">
+                Notiere dir bei Bedarf eine <strong>kleine Hilfs-Reihe</strong> des zweistelligen Teilers (1· , 2· , 5· ) und dividiere schriftlich:
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-2">
+                <!-- Hilfsreihe -->
+                <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200 text-xs">
+                  <span class="font-bold text-purple-900 block mb-1">💡 Hilfstabelle:</span>
+                  <div class="space-y-0.5 font-mono text-[11px] text-slate-700" id="t4-helper-table">
+                    <div>1 · <span class="t4-div-label">12</span> = <span class="t4-m1">12</span></div>
+                    <div>2 · <span class="t4-div-label">12</span> = <span class="t4-m2">24</span></div>
+                    <div>5 · <span class="t4-div-label">12</span> = <span class="t4-m5">60</span></div>
+                    <div>10 · <span class="t4-div-label">12</span> = <span class="t4-m10">120</span></div>
+                  </div>
+                </div>
+
+                <!-- Rechenbereich mit einzeiliger Darstellung -->
+                <div class="md:col-span-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col justify-between">
+                  <div class="flex items-center justify-between flex-nowrap whitespace-nowrap overflow-x-auto">
+                    <span class="text-xs font-bold text-slate-700 shrink-0">Berechne:</span>
+                    <span id="t4-task-display" class="badge-chip bg-white border-purple-400 text-purple-950 font-mono text-base font-bold shrink-0">1 872 : 12 = ?</span>
+                  </div>
+                  <div class="calc-row-single gap-2 mt-2 overflow-x-auto">
+                    <span class="text-xs font-black text-slate-800 shrink-0">Endergebnis:</span>
+                    <input type="number" id="t4-res-input" class="w-28 text-center border-2 border-purple-500 rounded-lg py-1 font-black text-purple-950 text-base outline-none bg-white shrink-0">
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 shrink-0" id="sol-t4-res"></span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Vergrößertes 36px Rechenkästchen Aufgabe 4 (Dynamische Höhe) -->
+              <div class="math-grid w-full rounded-xl overflow-hidden font-mono text-base font-bold" style="line-height: 36px;">
+                <div id="t4-grid-default" class="w-full flex flex-col text-indigo-900"></div>
+                <div id="t4-grid-solution" class="w-full flex-col hidden text-emerald-700"></div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 5: Mathe-Detektiv: Fehler im Rechenweg aufdecken -->
+            <div class="task-block mb-3 p-3.5 rounded-2xl bg-white border-2 border-purple-300 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-purple-700 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">5</span>
+                  Mathe-Detektiv: Wo hat Paul gepatzt?
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 4 P.</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-2 text-xs md:text-sm">
+                <!-- Pauls fehlerhafte Rechnung -->
+                <div class="bg-rose-50/70 p-3 rounded-xl border border-rose-300 font-mono">
+                  <span class="font-extrabold text-rose-900 font-sans block mb-1 text-xs">⚠️ Pauls fehlerhafte Rechnung:</span>
+                  <div class="text-xs md:text-sm leading-tight text-slate-800 font-bold whitespace-nowrap">
+                    <p>4 0 2 4 : 4 = <span class="bg-rose-200 text-rose-900 px-1 py-0.5 rounded">1 6</span> &nbsp;❌</p>
+                    <p>-4 ↓</p>
+                    <p>&nbsp; 0 2 4</p>
+                    <p>&nbsp;&nbsp;-2 4</p>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp; 0</p>
+                  </div>
+                  <p class="text-[10px] text-rose-800 font-sans font-bold mt-2">
+                    Paul sagt: „4 durch 4 ist 1. Die Nullen und die 2 beachte ich nicht, 24 durch 4 ist 6. Also 16!“
+                  </p>
+                </div>
+
+                <!-- Fehlerbeschreibung & Korrektur (Streng einzeilig) -->
+                <div class="space-y-1.5">
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-0.5">a) Erkläre Pauls Denkfehler genau:</label>
+                    <textarea id="t5-explanation" rows="2" class="w-full text-xs p-2 border border-slate-300 rounded-lg focus:border-purple-500 outline-none"></textarea>
+                    <span class="solution-hint hidden text-xs font-bold text-emerald-600 block mt-0.5" id="sol-t5-text"></span>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-0.5">b) Das richtige Ergebnis lautet:</label>
+                    <div class="calc-row-single gap-2 overflow-x-auto w-full">
+                      <span class="font-mono text-sm font-bold shrink-0">4 024 : 4 = </span>
+                      <input type="number" id="t5-correct-input" class="w-36 text-center border-2 border-purple-500 rounded-lg py-1 px-2 font-bold text-purple-950 text-xs md:text-sm outline-none bg-white shrink-0">
+                      <span class="solution-hint hidden text-xs font-bold text-emerald-600 shrink-0" id="sol-t5-res"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Aufgabe 6: Sachaufgabe (Streng einzeilige Rechnungen) -->
+            <div class="task-block p-3.5 rounded-2xl bg-white border-2 border-purple-300 shadow-xs">
+              <div class="flex justify-between items-center mb-1.5">
+                <h4 class="font-black text-slate-900 text-sm md:text-base flex items-center gap-2">
+                  <span class="bg-purple-700 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-black">6</span>
+                  Sachaufgabe: Jahrgangsfahrt der KGS Bad Münder
+                </h4>
+                <span class="text-xs font-black text-slate-700 bg-slate-100 border border-slate-300 px-2 py-0.5 rounded-lg">___ / 4 P.</span>
+              </div>
+
+              <!-- Dynamische Sachaufgabe -->
+              <p class="text-xs md:text-sm text-slate-800 leading-relaxed mb-2 font-medium">
+                Für die Fahrt ins Schullandheim haben sich an der KGS Bad Münder <strong id="t6-students" class="text-purple-950 font-black">138 Personen</strong> (Schülerinnen, Schüler und Lehrkräfte) angemeldet. Jeder Reisebus bietet Platz für exakt <strong id="t6-bus-seats" class="text-purple-950 font-black">32 Personen</strong>.
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs md:text-sm">
+                <!-- Rechnung (Einzeilig ohne Umbruch) -->
+                <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                  <span class="font-bold text-slate-800 block mb-1">Rechnung mit Rest:</span>
+                  <div class="calc-row-single gap-1.5 mono-font overflow-x-auto w-full">
+                    <span id="t6-equation-text" class="shrink-0">138 : 32 = </span>
+                    <input type="number" id="t6-ans-quot" class="w-14 text-center border-b-2 border-slate-400 font-bold outline-none shrink-0">
+                    <span class="font-bold text-slate-700 shrink-0">R</span>
+                    <input type="number" id="t6-ans-rem" class="w-14 text-center border-b-2 border-slate-400 font-bold outline-none shrink-0">
+                  </div>
+                  <span class="solution-hint hidden text-xs font-bold text-emerald-600 block mt-1" id="sol-t6-calc"></span>
+                </div>
+
+                <!-- Interpretation des Rests (Einzeilig) -->
+                <div class="bg-purple-50 p-2.5 rounded-xl border border-purple-200">
+                  <span class="font-bold text-purple-950 block mb-1">Entscheidung & Begründung:</span>
+                  <p class="text-[11px] text-slate-700 mb-1">Wie viele Busse müssen bestellt werden, damit <strong>niemand</strong> an der Schule zurückbleibt?</p>
+                  <div class="calc-row-single gap-2 overflow-x-auto w-full">
+                    <span class="shrink-0">Es werden benötigt:</span>
+                    <input type="number" id="t6-final-buses" class="w-16 text-center border-2 border-purple-600 rounded-lg py-0.5 font-black text-purple-950 outline-none shrink-0">
+                    <span class="font-bold shrink-0">Busse</span>
+                  </div>
+                  <span class="solution-hint hidden text-xs font-bold text-emerald-600 block mt-1" id="sol-t6-buses"></span>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- Schüler-Check & Lehrkraft-Rückmeldekasten -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
+            <!-- Selbsteinschätzung -->
+            <div class="bg-indigo-50/60 p-3 rounded-2xl border border-indigo-200 text-xs">
+              <span class="font-black text-indigo-950 heading-font block mb-1">🌟 Mein Lern-Check:</span>
+              <div class="space-y-1 font-bold text-slate-700 text-[11px]">
+                <div class="flex justify-between items-center bg-white p-1 rounded-lg">
+                  <span>Halbschriftlich zerlegen</span>
+                  <span>😊&nbsp;<input type="radio" name="chk1">&nbsp; 😐&nbsp;<input type="radio" name="chk1">&nbsp; 😟&nbsp;<input type="radio" name="chk1"></span>
+                </div>
+                <div class="flex justify-between items-center bg-white p-1 rounded-lg">
+                  <span>Schriftlich dividieren</span>
+                  <span>😊&nbsp;<input type="radio" name="chk2">&nbsp; 😐&nbsp;<input type="radio" name="chk2">&nbsp; 😟&nbsp;<input type="radio" name="chk2"></span>
+                </div>
+                <div class="flex justify-between items-center bg-white p-1 rounded-lg">
+                  <span>Zweistelliger Teiler</span>
+                  <span>😊&nbsp;<input type="radio" name="chk3">&nbsp; 😐&nbsp;<input type="radio" name="chk3">&nbsp; 😟&nbsp;<input type="radio" name="chk3"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- KGS Rückmeldekasten für Lehrkraft -->
+            <div class="bg-slate-50 p-3 rounded-2xl border-2 border-slate-300 text-xs">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-extrabold text-slate-800">Ergebnis (KGS Bad Münder):</span>
+                <span class="text-[11px] bg-indigo-100 text-indigo-900 font-black px-2 py-0.5 rounded">max. 30 P.</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="text-base font-black text-indigo-900">
+                  Punkte: <span id="display-score-user">___</span> / 30
+                </div>
+                <div class="text-base font-black text-emerald-800">
+                  Note: <span id="display-grade-user">___</span>
+                </div>
+              </div>
+              <div class="mt-1.5 flex flex-wrap gap-2 font-bold text-[10px] text-slate-600">
+                <label class="flex items-center gap-1.5 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">
+                  <input type="checkbox" id="chk-e-reached">
+                  <img src="3%20Kirsche.png" alt="Kirsche" class="w-3.5 h-3.5 shrink-0 object-contain">
+                  <span class="text-rose-700 font-black">Kirschen:</span>
+                  Erweiterter Standard
+                </label>
+                <label class="flex items-center gap-1.5 bg-purple-50 px-2 py-0.5 rounded-md border border-purple-200">
+                  <input type="checkbox" id="chk-z-reached">
+                  <img src="4%20Brombeere.png" alt="Brombeere" class="w-3.5 h-3.5 shrink-0 object-contain">
+                  <span class="text-purple-800 font-black">Brombeere:</span>
+                  Expertenstandard
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Fußzeile Seite 2 mit KI-Kennzeichnung -->
+        <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-xs text-slate-400 font-bold mt-4">
+          <span>KGS Bad Münder • Mathematik 5 • <strong class="text-slate-500">🤖 KI-generiertes Unterrichtsmaterial</strong></span>
+          <span class="bg-slate-100 px-2 py-0.5 rounded-md text-slate-600">Seite 2 von 2 • Ende des Nachweises</span>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    // ==============================================================
+    // ZUSTANDSVERWALTUNG & GENERIERUNG DYNAMISCHER AUFGABEN
+    // ==============================================================
+    let currentTaskData = {};
+    let timerSeconds = 30 * 60; // 30 Minuten
+    let timerInterval = null;
+    let solutionsVisible = false;
+
+    // Hilfsfunktion: Zufallszahl im Intervall [min, max]
+    function rand(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // Generator für HTML-Gitterzeilen (36px Raster)
+    function renderGridRow(chars, ulIndex = -1, colorClass = '') {
+      let html = '<div class="calc-row-single" style="height: 36px;">';
+      for (let j = 0; j < chars.length; j++) {
+        let char = chars[j];
+        let border = (ulIndex !== -1 && j >= ulIndex) ? 'border-bottom: 2px solid currentColor;' : '';
+        let cClass = (char === '-' || char === '_') ? 'text-slate-500' : colorClass;
+        
+        if (char === ' ') {
+          html += `<span style="display: inline-block; width: 36px; ${border}"></span>`;
+        } else {
+          html += `<span class="${cClass}" style="display: inline-block; width: 36px; text-align: center; ${border}">${char}</span>`;
+        }
+      }
+      html += '</div>';
+      return html;
+    }
+
+    // Leeres Raster: Reserviert den Platz für den späteren handschriftlichen Rechenweg
+    function generateEmptyGridHTML(dividend, divisor) {
+      const str = `${dividend} : ${divisor} =`;
+      let html = renderGridRow(str.replace(/\s+/g, '').split(''));
+      
+      let qStr = Math.floor(dividend / divisor).toString();
+      let extraRows = qStr.length * 2; // Pro Ziffer des Quotienten 2 Zeilen (Minus & Rest)
+      
+      for(let i = 0; i < extraRows; i++) {
+        html += '<div class="calc-row-single" style="height: 36px;"></div>';
+      }
+      return html;
+    }
+
+    // Musterlösung: Kompletter Schritt-für-Schritt Divisionsweg nach dt. Standard
+    function generateFullDivisionHTML(dividend, divisor) {
+      let divStr = dividend.toString();
+      let qStr = Math.floor(dividend / divisor).toString();
+      let rowsHTML = [];
+
+      let startChars = `${divStr}:${divisor}=${qStr}`.split('');
+      rowsHTML.push(renderGridRow(startChars, -1, 'text-emerald-700'));
+
+      let currentVal = parseInt(divStr[0]);
+      let currentOffset = 0;
+      
+      while (currentVal < divisor && currentOffset < divStr.length - 1) {
+        currentOffset++;
+        currentVal = parseInt(divStr.substring(0, currentOffset + 1));
+      }
+
+      for (let i = 0; i < qStr.length; i++) {
+        let qDigit = parseInt(qStr[i]);
+        let sub = qDigit * divisor;
+        let subStr = sub.toString();
+
+        let padSub = currentOffset - subStr.length + 1;
+        let subRowChars = Array(Math.max(0, padSub - 1)).fill(' ').concat(['-'], subStr.split(''));
+        rowsHTML.push(renderGridRow(subRowChars, Math.max(0, padSub - 1), 'text-emerald-700'));
+
+        let rem = currentVal - sub;
+        
+        if (i < qStr.length - 1) {
+          currentOffset++;
+          let nextDigit = divStr[currentOffset];
+          currentVal = parseInt(rem.toString() + nextDigit);
+          let remStr = rem.toString() + nextDigit;
+          let padRem = currentOffset - remStr.length + 1;
+          let remRowChars = Array(Math.max(0, padRem)).fill(' ').concat(remStr.split(''));
+          rowsHTML.push(renderGridRow(remRowChars, -1, 'text-emerald-700'));
+        } else {
+          let remStr = rem.toString();
+          let padRem = currentOffset - remStr.length + 1;
+          let remRowChars = Array(Math.max(0, padRem)).fill(' ').concat(remStr.split(''));
+          rowsHTML.push(renderGridRow(remRowChars, -1, 'text-emerald-700'));
+        }
+      }
+      return rowsHTML.join('');
+    }
+
+    // Zufalls-Generator für didaktisch saubere Divisionsaufgaben
+    function generateNewProblems() {
+      // 1. Aufgabe 1: Halbschriftliche Division (z. B. Teiler 4, 6, 7 oder 8)
+      const d1 = [4, 6, 7, 8][rand(0, 3)];
+      const h_mult = rand(1, 3); // z.B. 100, 200, 300
+      const z_mult = rand(1, 4); // z.B. 20, 30
+      const e_mult = rand(2, 6); // z.B. 4, 6
+      const p1 = h_mult * 100 * d1; // z.B. 600
+      const p2 = z_mult * 10 * d1;  // z.B. 120
+      const p3 = e_mult * d1;       // z.B. 36
+      const t1_dividend = p1 + p2 + p3;
+      const t1_quotient = (h_mult * 100) + (z_mult * 10) + e_mult;
+
+      // 2. Aufgabe 2a: Schriftliche Division (3- bis 4-stellig durch 3, 4, 6)
+      const d2a = [3, 4, 6][rand(0, 2)];
+      const t2a_quotient = rand(320, 950);
+      const t2a_dividend = t2a_quotient * d2a;
+
+      // 2. Aufgabe 2b: Zweite schriftliche Division (durch 5, 7, 8)
+      const d2b = [5, 7, 8][rand(0, 2)];
+      const t2b_quotient = rand(240, 890);
+      const t2b_dividend = t2b_quotient * d2b;
+
+      // 3. Aufgabe 3: Division mit Rest & Probe (z. B. Teiler 6, 7, 8 oder 9)
+      const d3 = [6, 7, 8, 9][rand(0, 3)];
+      const t3_quotient = rand(45, 88);
+      const t3_remainder = rand(1, d3 - 1);
+      const t3_dividend = (t3_quotient * d3) + t3_remainder;
+
+      // 4. Aufgabe 4: Zweistelliger Teiler (12, 14, 15, 24 oder 25)
+      const d4 = [12, 14, 15, 24, 25][rand(0, 4)];
+      const t4_quotient = rand(112, 195);
+      const t4_dividend = t4_quotient * d4;
+
+      // 5. Aufgabe 5: Pauls Fehlertext (statisch didaktisch perfekt verankert: 4024 : 4 = 1006)
+      const t5_correct = 1006;
+
+      // 6. Aufgabe 6: Sachaufgabe (Busse mit Rest)
+      const busSeats = [32, 36, 45][rand(0, 2)];
+      const busesCount = rand(3, 5);
+      const extraPassengers = rand(3, busSeats - 4);
+      const totalPassengers = (busesCount * busSeats) + extraPassengers;
+      const neededBuses = busesCount + 1; // Aufrunden!
+
+      return {
+        t1: { dividend: t1_dividend, divisor: d1, p1, p2, p3, q1: p1/d1, q2: p2/d1, q3: p3/d1, quotient: t1_quotient },
+        t2a: { dividend: t2a_dividend, divisor: d2a, quotient: t2a_quotient },
+        t2b: { dividend: t2b_dividend, divisor: d2b, quotient: t2b_quotient },
+        t3: { dividend: t3_dividend, divisor: d3, quotient: t3_quotient, remainder: t3_remainder },
+        t4: { dividend: t4_dividend, divisor: d4, quotient: t4_quotient },
+        t5: { correct: t5_correct },
+        t6: { total: totalPassengers, seats: busSeats, quot: busesCount, rem: extraPassengers, buses: neededBuses }
+      };
+    }
+
+    // DOM mit den neuen Aufgabendaten füllen
+    function renderTasks() {
+      const data = currentTaskData;
+
+      // Aufgabe 1
+      document.getElementById('t1-equation').textContent = `${data.t1.dividend} : ${data.t1.divisor} = ?`;
+      document.getElementById('t1-div1').textContent = data.t1.divisor;
+      document.getElementById('t1-div2').textContent = data.t1.divisor;
+      document.getElementById('t1-div3').textContent = data.t1.divisor;
+      document.getElementById('t1-full-eq').textContent = `${data.t1.dividend} : ${data.t1.divisor} = `;
+
+      document.getElementById('sol-t1-row1').textContent = `(Lösung: ${data.t1.p1} : ${data.t1.divisor} = ${data.t1.q1})`;
+      document.getElementById('sol-t1-row2').textContent = `(Lösung: ${data.t1.p2} : ${data.t1.divisor} = ${data.t1.q2})`;
+      document.getElementById('sol-t1-row3').textContent = `(Lösung: ${data.t1.p3} : ${data.t1.divisor} = ${data.t1.q3})`;
+      document.getElementById('sol-t1-res').textContent = `(Lösung: ${data.t1.quotient})`;
+
+      // Aufgabe 2a
+      document.getElementById('t2a-ue-div').textContent = `${data.t2a.dividend} : ${data.t2a.divisor}`;
+      document.getElementById('t2a-task-display').textContent = `${data.t2a.dividend.toLocaleString('de-DE')} : ${data.t2a.divisor} = ?`;
+      document.getElementById('sol-t2a-ue').textContent = `(Passender Ü: ca. ${Math.round(data.t2a.dividend/1000)*1000} : ${data.t2a.divisor} ≈ ${Math.round(data.t2a.dividend / data.t2a.divisor / 100)*100})`;
+      document.getElementById('sol-t2a-res').textContent = `(Exakt: ${data.t2a.quotient})`;
+      
+      document.getElementById('t2a-grid-default').innerHTML = generateEmptyGridHTML(data.t2a.dividend, data.t2a.divisor);
+      document.getElementById('t2a-grid-solution').innerHTML = generateFullDivisionHTML(data.t2a.dividend, data.t2a.divisor);
+
+      // Aufgabe 2b
+      document.getElementById('t2b-ue-div').textContent = `${data.t2b.dividend} : ${data.t2b.divisor}`;
+      document.getElementById('t2b-task-display').textContent = `${data.t2b.dividend.toLocaleString('de-DE')} : ${data.t2b.divisor} = ?`;
+      document.getElementById('sol-t2b-ue').textContent = `(Passender Ü: ca. ${Math.round(data.t2b.dividend/1000)*1000} : ${data.t2b.divisor} ≈ ${Math.round(data.t2b.dividend / data.t2b.divisor / 100)*100})`;
+      document.getElementById('sol-t2b-res').textContent = `(Exakt: ${data.t2b.quotient})`;
+
+      document.getElementById('t2b-grid-default').innerHTML = generateEmptyGridHTML(data.t2b.dividend, data.t2b.divisor);
+      document.getElementById('t2b-grid-solution').innerHTML = generateFullDivisionHTML(data.t2b.dividend, data.t2b.divisor);
+
+      // Aufgabe 3
+      document.getElementById('t3-equation-text').textContent = `${data.t3.dividend} : ${data.t3.divisor} = `;
+      document.getElementById('t3-probe-divisor').textContent = data.t3.divisor;
+      document.getElementById('sol-t3-div').textContent = `(Lösung: ${data.t3.quotient} R ${data.t3.remainder})`;
+      document.getElementById('sol-t3-probe').textContent = `(Probe: ${data.t3.quotient} · ${data.t3.divisor} + ${data.t3.remainder} = ${data.t3.dividend})`;
+
+      // Aufgabe 4
+      document.querySelectorAll('.t4-div-label').forEach(el => el.textContent = data.t4.divisor);
+      document.querySelector('.t4-m1').textContent = data.t4.divisor * 1;
+      document.querySelector('.t4-m2').textContent = data.t4.divisor * 2;
+      document.querySelector('.t4-m5').textContent = data.t4.divisor * 5;
+      document.querySelector('.t4-m10').textContent = data.t4.divisor * 10;
+      document.getElementById('t4-task-display').textContent = `${data.t4.dividend.toLocaleString('de-DE')} : ${data.t4.divisor} = ?`;
+      document.getElementById('sol-t4-res').textContent = `(Lösung: ${data.t4.quotient})`;
+
+      document.getElementById('t4-grid-default').innerHTML = generateEmptyGridHTML(data.t4.dividend, data.t4.divisor);
+      document.getElementById('t4-grid-solution').innerHTML = generateFullDivisionHTML(data.t4.dividend, data.t4.divisor);
+
+
+      // Aufgabe 5
+      document.getElementById('sol-t5-text').textContent = `(Erklärung: Paul hat die Ziffern 0 an der Hunderterstelle und 2 an der Zehnerstelle übersprungen. 0 : 4 = 0 und 2 : 4 = 0 R 2. Es müssen Nullen als Stellenwert-Halter notiert werden!)`;
+      document.getElementById('sol-t5-res').textContent = `(Richtig: 1006)`;
+
+      // Aufgabe 6
+      document.getElementById('t6-students').textContent = `${data.t6.total} Personen`;
+      document.getElementById('t6-bus-seats').textContent = `${data.t6.seats} Personen`;
+      document.getElementById('t6-equation-text').textContent = `${data.t6.total} : ${data.t6.seats} = `;
+      document.getElementById('sol-t6-calc').textContent = `(Rechnung: ${data.t6.quot} R ${data.t6.rem})`;
+      document.getElementById('sol-t6-buses').textContent = `(Lösung: ${data.t6.buses} Busse, da ${data.t6.rem} Personen sonst zurückblieben!)`;
+
+      // Inputs zurücksetzen
+      clearAllInputs();
+    }
+
+    function clearAllInputs() {
+      document.querySelectorAll('input[type="number"], input[type="text"]:not(#student-name):not(#student-class):not(#test-date), textarea').forEach(inp => {
+        inp.value = '';
+        inp.classList.remove('bg-emerald-100', 'bg-rose-100', 'border-emerald-500', 'border-rose-500');
+      });
+      document.getElementById('display-score-user').textContent = '___';
+      document.getElementById('display-grade-user').textContent = '___';
+      document.getElementById('chk-e-reached').checked = false;
+      document.getElementById('chk-z-reached').checked = false;
+    }
+
+    // ==============================================================
+    // 30-MINUTEN TIMER
+    // ==============================================================
+    function updateTimerDisplay() {
+      const min = Math.floor(timerSeconds / 60);
+      const sec = timerSeconds % 60;
+      const display = document.getElementById('timer-display');
+      display.textContent = `${String(min).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
+
+      if (timerSeconds <= 300 && timerSeconds > 0) {
+        display.classList.add('text-rose-600', 'animate-pulse');
+      } else if (timerSeconds === 0) {
+        display.classList.remove('text-indigo-700', 'animate-pulse');
+        display.classList.add('text-rose-800');
+        stopTimer();
+        showModal('⏰ Zeit abgelaufen!', 'Die 30 Minuten Prüfungszeit sind vorbei. Bitte lege den Stift zur Seite oder klicke auf "Jetzt auswerten".', '🔔');
+      }
+    }
+
+    function toggleTimer() {
+      if (timerInterval) {
+        stopTimer();
+      } else {
+        startTimer();
+      }
+    }
+
+    function startTimer() {
+      if (timerSeconds <= 0) timerSeconds = 30 * 60;
+      timerInterval = setInterval(() => {
+        timerSeconds--;
+        updateTimerDisplay();
+      }, 1000);
+      document.getElementById('timer-play-icon').classList.add('hidden');
+      document.getElementById('timer-pause-icon').classList.remove('hidden');
+      document.getElementById('timer-toggle-btn').classList.replace('bg-indigo-600', 'bg-amber-600');
+    }
+
+    function stopTimer() {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      document.getElementById('timer-play-icon').classList.remove('hidden');
+      document.getElementById('timer-pause-icon').classList.add('hidden');
+      document.getElementById('timer-toggle-btn').classList.replace('bg-amber-600', 'bg-indigo-600');
+    }
+
+    function resetTimer() {
+      stopTimer();
+      timerSeconds = 30 * 60;
+      const display = document.getElementById('timer-display');
+      display.classList.remove('text-rose-600', 'animate-pulse');
+      display.classList.add('text-indigo-700');
+      updateTimerDisplay();
+    }
+
+    // ==============================================================
+    // AUSWERTUNG & NOTENBERECHNUNG
+    // ==============================================================
+    function evaluateTest() {
+      let score = 0;
+      const d = currentTaskData;
+
+      // 1. Aufgabe 1 (max 6 Punkte)
+      const t1_ans = parseInt(document.getElementById('t1-ans').value, 10);
+      const t1_q1 = parseInt(document.getElementById('t1-q1').value, 10);
+      const t1_q2 = parseInt(document.getElementById('t1-q2').value, 10);
+      const t1_q3 = parseInt(document.getElementById('t1-q3').value, 10);
+
+      if (t1_ans === d.t1.quotient) { score += 3; markInput('t1-ans', true); } else { markInput('t1-ans', false); }
+      if (t1_q1 === d.t1.q1) { score += 1; markInput('t1-q1', true); }
+      if (t1_q2 === d.t1.q2) { score += 1; markInput('t1-q2', true); }
+      if (t1_q3 === d.t1.q3) { score += 1; markInput('t1-q3', true); }
+
+      // 2. Aufgabe 2 (max 6 Punkte: je 3 P. für 2a und 2b -> 2 P. Ergebnis, 1 P. Überschlag)
+      const t2a_res = parseInt(document.getElementById('t2a-result-input').value, 10);
+      const t2a_ue = document.getElementById('t2a-ue-input').value.trim();
+      if (t2a_res === d.t2a.quotient) { score += 2; markInput('t2a-result-input', true); } else { markInput('t2a-result-input', false); }
+      if (t2a_ue.length >= 3) { score += 1; markInput('t2a-ue-input', true); }
+
+      const t2b_res = parseInt(document.getElementById('t2b-result-input').value, 10);
+      const t2b_ue = document.getElementById('t2b-ue-input').value.trim();
+      if (t2b_res === d.t2b.quotient) { score += 2; markInput('t2b-result-input', true); } else { markInput('t2b-result-input', false); }
+      if (t2b_ue.length >= 3) { score += 1; markInput('t2b-ue-input', true); }
+
+      // 3. Aufgabe 3 (max 6 Punkte: 3 P. Division R, 3 P. Probe)
+      const t3_q = parseInt(document.getElementById('t3-quot-input').value, 10);
+      const t3_r = parseInt(document.getElementById('t3-rem-input').value, 10);
+      const t3_probe_tot = parseInt(document.getElementById('t3-probe-total').value, 10);
+
+      if (t3_q === d.t3.quotient && t3_r === d.t3.remainder) {
+        score += 3;
+        markInput('t3-quot-input', true);
+        markInput('t3-rem-input', true);
+      } else {
+        markInput('t3-quot-input', false);
+        markInput('t3-rem-input', false);
+      }
+      if (t3_probe_tot === d.t3.dividend) {
+        score += 3;
+        markInput('t3-probe-total', true);
+      }
+
+      // 4. Aufgabe 4 (max 4 Punkte: Zweistelliger Teiler)
+      const t4_res = parseInt(document.getElementById('t4-res-input').value, 10);
+      if (t4_res === d.t4.quotient) { score += 4; markInput('t4-res-input', true); } else { markInput('t4-res-input', false); }
+
+      // 5. Aufgabe 5 (max 4 Punkte: 2 P. Erklärung, 2 P. Korrektur 1006)
+      const t5_res = parseInt(document.getElementById('t5-correct-input').value, 10);
+      const t5_exp = document.getElementById('t5-explanation').value.trim();
+      if (t5_res === d.t5.correct) { score += 2; markInput('t5-correct-input', true); } else { markInput('t5-correct-input', false); }
+      if (t5_exp.length > 8) { score += 2; markInput('t5-explanation', true); }
+
+      // 6. Aufgabe 6 (max 4 Punkte: 2 P. Rechnung, 2 P. Bus-Aufrundung)
+      const t6_q = parseInt(document.getElementById('t6-ans-quot').value, 10);
+      const t6_r = parseInt(document.getElementById('t6-ans-rem').value, 10);
+      const t6_b = parseInt(document.getElementById('t6-final-buses').value, 10);
+
+      if (t6_q === d.t6.quot && t6_r === d.t6.rem) {
+        score += 2;
+        markInput('t6-ans-quot', true);
+        markInput('t6-ans-rem', true);
+      }
+      if (t6_b === d.t6.buses) {
+        score += 2;
+        markInput('t6-final-buses', true);
+      } else {
+        markInput('t6-final-buses', false);
+      }
+
+      // Notenberechnung KGS Bad Münder (30 Punkte = 100%)
+      let note = '6';
+      let feedback = '';
+      if (score >= 26) { note = '1 (Sehr gut)'; feedback = 'Hervorragend! Auch der Expertenstandard wurde souverän gemeistert.'; }
+      else if (score >= 22) { note = '2 (Gut)'; feedback = 'Super Leistung! Der erweiterte Standard sitzt absolut sicher, gute Ansätze im Expertenbereich.'; }
+      else if (score >= 18) { note = '3 (Befriedigend)'; feedback = 'Solides Ergebnis! Das erweiterte Niveau ist gut erreicht worden.'; }
+      else if (score >= 14) { note = '4 (Ausreichend)'; feedback = 'Basiskönnen vorhanden. Wiederhole nochmals das schriftliche Verfahren mit Nullen und Resten.'; }
+      else if (score >= 8) { note = '5 (Mangelhaft)'; feedback = 'Förderbedarf. Das stellenweise Vorgehen bei der schriftlichen Division muss geübt werden.'; }
+      else { note = '6 (Ungenügend)'; feedback = 'Bitte wende dich an deine Lehrkraft für gezieltes Fördermaterial.'; }
+
+      document.getElementById('display-score-user').textContent = score;
+      document.getElementById('display-grade-user').textContent = note;
+      document.getElementById('chk-e-reached').checked = score >= 16;
+      document.getElementById('chk-z-reached').checked = score >= 24;
+
+      showModal(`Ergebnis: ${score} / 30 Punkten (${note})`, feedback, score >= 18 ? '🏆' : '📚');
+    }
+
+    function markInput(id, isCorrect) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (isCorrect) {
+        el.classList.add('bg-emerald-100', 'border-emerald-500');
+        el.classList.remove('bg-rose-100', 'border-rose-500');
+      } else {
+        el.classList.add('bg-rose-100', 'border-rose-500');
+        el.classList.remove('bg-emerald-100', 'border-emerald-500');
+      }
+    }
+
+    // ==============================================================
+    // MODAL- UND HILFSFUNKTIONEN
+    // ==============================================================
+    function showModal(title, text, icon = '💡') {
+      document.getElementById('modal-icon').textContent = icon;
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-body').textContent = text;
+      document.getElementById('custom-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('custom-modal').classList.add('hidden');
+    }
+
+    function toggleSolutions() {
+      solutionsVisible = !solutionsVisible;
+      const hints = document.querySelectorAll('.solution-hint');
+      const btn = document.getElementById('btn-toggle-solutions');
+      
+      const defaults = document.querySelectorAll('[id$="-grid-default"]');
+      const solutions = document.querySelectorAll('[id$="-grid-solution"]');
+
+      if (solutionsVisible) {
+        hints.forEach(h => h.classList.remove('hidden'));
+        defaults.forEach(d => d.classList.add('hidden'));
+        solutions.forEach(s => { s.classList.remove('hidden'); s.classList.add('flex'); });
+        
+        btn.classList.replace('bg-sky-600', 'bg-rose-600');
+        btn.innerHTML = '<span>🙈</span> Musterlösung verbergen';
+      } else {
+        hints.forEach(h => h.classList.add('hidden'));
+        defaults.forEach(d => d.classList.remove('hidden'));
+        solutions.forEach(s => { s.classList.add('hidden'); s.classList.remove('flex'); });
+        
+        btn.classList.replace('bg-rose-600', 'bg-sky-600');
+        btn.innerHTML = '<span>👁️</span> Musterlösung einblenden';
+      }
+    }
+
+    function regenerateTasks() {
+      currentTaskData = generateNewProblems();
+      renderTasks();
+      resetTimer();
+      showModal('Neue Aufgaben gewürfelt!', 'Alle Zahlen wurden neu berechnet. Der Schwierigkeitsgrad bleibt exakt identisch.', '🎲');
+    }
+
+    // Synchronisiere Namenfelder für den Druck
+    document.addEventListener('DOMContentLoaded', () => {
+      currentTaskData = generateNewProblems();
+      renderTasks();
+
+      // Datum bleibt leer/offen für beliebige handschriftliche oder manuelle Eingabe
+      const nameInput = document.getElementById('student-name');
+      nameInput.addEventListener('input', (e) => {
+        document.querySelectorAll('.header-name-mirror').forEach(mirror => {
+          mirror.textContent = e.target.value || '______________________';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
